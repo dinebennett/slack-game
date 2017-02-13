@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta property="og:title" content="Know your Zoona"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://www.knowyourzoona.com"/>
+    <meta property="og:image" content="http://www.ilovezoona.com/blog/wp-content/uploads/2016/05/Blimp.jpg"/>
+    <meta property="og:site_name" content="Know your Zoona"/>
+    <meta property="og:description" content="Get to know your Zoona teammates while playing a game."/>
+
+    <meta name="twitter:card" content="Know your Zoona"/>
+    <meta name="twitter:title" content="Know your Zoona"/>
+    <meta name="twitter:description" content="Get to know your Zoona teammates while playing a game."/>
+    <meta name="twitter:image" content="http://www.ilovezoona.com/blog/wp-content/uploads/2016/05/Blimp.jpg"/>
+
+    <title>Know your Zoona</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <link rel="stylesheet" href=styles/styles.css>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.2.0/vue-resource.min.js"></script>
+    <script src="index.js"></script>
+
+</head>
+
+<body>
+
+<div class="content" id="app">
+
+    <div class="container" v-cloak>
+
+        <div class="custom-block">
+
+            <!-- This is the loading block -->
+            <div v-if="isLoading">
+                <h1 class="jumbo-font">Loading...</h1>
+            </div>
+
+            <!-- This is the final score block -->
+            <div v-else-if="finalScoreView">
+                <div class="block final-result">
+                    <div class="row flex">
+                        <div class="col-xs-12 col-sm-8 col-md-6 centered">
+                            <div v-if="finalScore > 90">
+                                <h1 class="jumbo-font">{{finalScore}} %</h1>
+                                <h1>Well done</h1>
+                                <h4>You're a walking Zoonapedia!</h4>
+                            </div>
+                            <div v-else-if="finalScore > 70">
+                                <h1 class="jumbo-font">{{finalScore}} %</h1>
+                                <h1>Good job</h1>
+                                <h4>You seem to know most people around here</h4>
+                            </div>
+                            <div v-else-if="finalScore > 50">
+                                <h1 class="jumbo-font">{{finalScore}} %</h1>
+                                <h1>Solid effort</h1>
+                                <h4>But you have some more Zoona friends to make</h4>
+                            </div>
+                            <div v-else>
+                                <h1 class="jumbo-font">{{finalScore}} %</h1>
+                                <h1>Nice try</h1>
+                                <h4>Refresh to play again and improve your score</h4>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-2 centered">
+                            <div v-if="finalScore > 90">
+                                <img src="img/medal.png" class="img-responsive img-border">
+                            </div>
+                            <div v-else-if="finalScore > 70">
+                                <img src="img/party.png" class="img-responsive img-border">
+                            </div>
+                            <div v-else-if="finalScore > 50">
+                                <img src="img/candy.png" class="img-responsive img-border">
+                            </div>
+                            <div v-else>
+                                <img src="img/cheese.png" class="img-responsive img-border">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- This is the result block -->
+            <div v-else-if="resultView">
+
+                <div class="block" v-bind:class="{ 'bg-success': isCorrect, 'bg-danger': isIncorrect }">
+                    <div class="row person-info-row">
+
+                        <div class="col-xs-12 col-sm-6 person-info">
+                            <div class="correctness">
+                                <div v-if="isCorrect" class="flex">
+                                    <div>
+                                        <img src="img/happy.png" class="faces img-responsive">
+                                    </div>
+                                    <div><h1 class="balanced-heading jumbo-font">Correct</h1></div>
+                                </div>
+                                <div v-else class="flex">
+                                    <div>
+                                        <img src="img/sad.png" class="faces img-responsive">
+                                    </div>
+                                    <div><h1 class="balanced-heading">Incorrect</h1></div>
+                                </div>
+                            </div>
+                            <h1>{{correctPerson.name}}</h1>
+                            <h4 style="margin-top:30px">{{correctPerson.title}}</h4>
+                            <button class="btn btn-primary btn-lg" v-on:click="dismissResult">Next Person >></button>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 centered">
+                            <img :src="correctPerson.picture_url" class="img-thumbnail img-result img-responsive">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- This is the normal block -->
+            <div v-else>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div class="name-details">
+                            <h1 class="name">{{correctPerson.name}}</h1>
+                            <h4>Choose the photo that matches the name :)</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row photo-row">
+                    <div v-for="decoy in decoys" class="col-md-3 col-sm-6 col-xs-6">
+                        <a v-on:click="doSomething(decoy.id)">
+                            <img :src="decoy.picture_url" class="img-thumbnail option-images">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+
+    <div class="footer-inner">
+        <p class="small-text">
+            <i class="fa fa-heart"></i> Made by <a href="https://github.com/dinebennett" target="_blank">Diné</a>
+            | On Zoona ZLabs Innovation Day
+            | Thank you to <a href="https://slack.com/" target="_blank">Slack</a>, <a href="https://vuejs.org" target="_blank">VueJS</a> and <a
+                href="http://getbootstrap.com/" target="_blank">Bootstrap</a> for being awesome</a>
+        </p>
+    </div>
+
+</div>
+
+</body>
+
+</html>

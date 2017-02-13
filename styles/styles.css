@@ -1,0 +1,152 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    border: 1px solid transparent;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.content {
+    min-height: 100%;
+    position: relative;
+    margin-bottom: -60px;
+}
+
+.footer {
+    text-align: center;
+    width: 100%;
+    display: block;
+    height: 60px;
+    background-color: #337ab7;
+    position: relative;
+    margin: 0 auto;
+    color: #e2e2e2;
+}
+
+.footer > p {
+    margin-bottom: 0;
+}
+
+.footer-inner {
+    padding-top: 15px;
+}
+
+a {
+    color: #e2e2e2;
+    text-decoration: underline;
+}
+
+a:focus, a:hover {
+    color: #8fcf00;
+    text-decoration: underline;
+}
+
+.custom-block {
+    margin-top: 40px;
+}
+
+.name {
+    margin-bottom: 30px;
+    font-size: 80px;
+}
+
+.name-details {
+    text-align: center;
+    background-color: #e8e8e8;
+    padding: 25px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.option-images {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.photo-row {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.block {
+    padding: 0 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.success {
+    background-color: #dff0d8;
+}
+
+.danger {
+    background-color: #f2dede;
+}
+
+.img-result {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    max-width: 400px;
+}
+
+.person-info {
+    text-align: center;
+    margin-top: 0px;
+    padding: 0 40px;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.correctness {
+    margin: 30px 0px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.person-info-row {
+    padding: 40px 0;
+}
+
+.btn {
+    margin: 30px 0;
+}
+
+.faces {
+    height: 90px;
+    margin: 0px 20px;
+}
+
+.balanced-heading {
+    margin: 20px 0px;
+}
+
+.final-result {
+    background-color: #d9edf7;
+}
+
+.img-border {
+    margin: 50px auto;
+    max-width: 200px;
+}
+
+.jumbo-font {
+    font-size: 63px;
+}
+
+[v-cloak] {
+    display: none;
+}
